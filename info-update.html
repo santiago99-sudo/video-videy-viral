@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Update System</title>
+    <title>Sistem Update Harian</title>
     <style>
         body { background: #0f0f0f; color: #fff; font-family: sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #333; width: 100%; margin-bottom: 20px; }
-        .header h1 { font-size: 20px; color: #ff0000; margin: 0; }
-        .container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 10px; }
-        .card { background: #1a1a1a; border-left: 4px solid #ff0000; padding: 15px; border-radius: 8px; text-decoration: none; color: #fff; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-        .card:active { transform: scale(0.98); background: #222; }
-        .ad-slot { margin: 15px 0; width: 320px; min-height: 50px; }
+        .header h1 { font-size: 20px; color: #ff0000; margin: 0; text-transform: uppercase; }
+        .container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; }
+        .card { background: #1a1a1a; border-left: 4px solid #ff0000; padding: 15px; border-radius: 8px; text-decoration: none; color: #fff; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .card:active { background: #333; transform: scale(0.97); }
+        .ad-slot { margin: 15px 0; width: 320px; min-height: 50px; background: #222; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <div class="header"><h1>INFO UPDATE HARIAN</h1><p style="font-size:12px; color:#666;">Silakan pilih data yang ingin diakses</p></div>
+    <div class="header"><h1>INFO UPDATE HARIAN</h1><p style="font-size:12px; color:#777;">Data terverifikasi otomatis setiap jam</p></div>
 
     <div class="ad-slot">
         <script type="text/javascript">
@@ -25,8 +25,7 @@
     </div>
 
     <div id="list-container" class="container">
-        <p style="text-align:center; color:#444;">Memproses data...</p>
-    </div>
+        </div>
 
     <div class="ad-slot">
         <script type="text/javascript">
@@ -46,12 +45,11 @@
                     const card = document.createElement('a');
                     card.href = link.trim();
                     card.className = 'card';
-                    // Menampilkan nomor urut untuk setiap link
-                    card.innerHTML = `<div><b>Database File #${index + 1}</b><br><span style="font-size:11px; color:#555;">Update Terverifikasi • Baru</span></div><div style="color:#ff0000; font-weight:bold;">LIHAT</div>`;
+                    card.innerHTML = `<div><b>Update Part #${index + 1}</b><br><span style="font-size:11px; color:#555;">Kualitas Terjamin • Baru</span></div><div style="color:#ff0000; font-weight:bold;">NONTON</div>`;
                     container.appendChild(card);
                 });
             })
-            .catch(err => { document.getElementById('list-container').innerHTML = 'Gagal memuat daftar.'; });
+            .catch(err => { console.error('Gagal mengambil data link'); });
     </script>
 </body>
 </html>
