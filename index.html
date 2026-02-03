@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player - Verification</title>
+    
+    <meta name="monetag" content="85429a6afd62863533f1a135efdfdb1d">
+
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px 0; }
         .ad-container { border: 2px solid red; border-radius: 20px; padding: 30px 15px; width: 85%; max-width: 380px; background: linear-gradient(to bottom, #1a0000, #000); margin: 20px 0; }
@@ -12,7 +15,7 @@
         .play-btn { width: 70px; height: 70px; background: red; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; box-shadow: 0 0 20px rgba(255,0,0,0.5); transition: 0.2s; }
         .play-btn:active { transform: scale(0.9); }
         .play-btn svg { width: 35px; fill: white; }
-        .ad-slot { width: 320px; min-height: 50px; margin: 10px 0; }
+        .ad-slot { width: 320px; min-height: 50px; margin: 15px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         #video-container { display: none; width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background: #000; z-index: 100; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
@@ -20,9 +23,9 @@
 <body>
 
     <div id="ad-screen">
-        <div class="ad-slot">
-            <p style="font-size:10px; color:#444;">ADVERTISEMENT</p>
-        </div>
+        <div class="ad-slot" id="monetag-native-slot">
+            <p style="font-size:10px; color:#444; margin-bottom:5px;">ADVERTISEMENT</p>
+            </div>
 
         <div class="ad-container">
             <h2>HANYA 1x IKLAN SAJA</h2>
@@ -50,7 +53,7 @@
     </div>
 
     <script>
-        // 3. MONETAG DIRECT LINK (Hanya muncul tiap 30 menit)
+        // 4. MONETAG DIRECT LINK (Sistem Cookie 30 Menit)
         const directLink = 'https://otieu.com/4/10545078';
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -66,6 +69,8 @@
                 document.getElementById('ad-screen').style.display = 'none';
                 document.getElementById('video-container').style.display = 'block';
                 document.getElementById('video-frame').src = videoUrl;
+            } else {
+                alert("Video URL tidak ditemukan!");
             }
         }
 
