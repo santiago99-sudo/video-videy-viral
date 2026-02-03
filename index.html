@@ -4,69 +4,80 @@
     <meta name="monetag" content="85429a6afd62863533f1a135efdfdb1d">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Viral Terkini</title>
+    <title>Video Player Viral</title>
     
     <script>(function(s){s.dataset.zone='10559608',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
     <style>
-        body { background-color: #111; color: white; font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .container { max-width: 500px; margin: auto; padding: 15px; border: 1px solid #333; border-radius: 10px; background: #222; }
-        /* Style Link agar tetap rapi */
-        #videoContainer a { 
-            display: block; background: #333; color: #00ff00; padding: 15px; 
+        body { background-color: #000; color: white; font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 10px; }
+        .container { max-width: 500px; margin: auto; }
+        
+        /* Style Link Daftar Video agar kembali seperti semula */
+        .video-link { 
+            display: block; background: #222; color: #00ff00; padding: 15px; 
             margin: 10px 0; text-decoration: none; border-radius: 8px; 
-            font-size: 14px; border-left: 5px solid #ff0000; text-align: left;
-            font-weight: bold;
+            border-left: 5px solid red; text-align: left; font-weight: bold;
         }
-        .ad-slot { margin: 15px 0; display: flex; justify-content: center; }
+
+        /* Overlay Tombol Merah (Muncul saat link diklik) */
+        #adOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;
+        }
+        .card { border: 2px solid red; border-radius: 20px; padding: 20px; background: #0a0000; width: 85%; max-width: 320px; }
+        .play-btn { background: red; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 15px auto; cursor: pointer; border: none; }
+        .play-btn::after { content: ''; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; margin-left: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="ad-slot">
+    <div style="margin-bottom:15px;">
         <script type="text/javascript">
             atOptions = {'key' : '592e755abc7058d43ae9daccfee62406','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/592e755abc7058d43ae9daccfee62406/invoke.js"></script>
     </div>
 
-    <h2 style="color: #ff3333;">LIST VIDEO VIRAL</h2>
-    <p style="font-size: 11px; color: #888;">Update: Feb 2026 | Iklan 1x Per 5 Menit</p>
+    <h2>DAFTAR VIDEO VIRAL</h2>
 
-    <div id="videoContainer">
-        
-        <a href="https://videy.co/v?id=SAMPLE1">VIDEO VIRAL MENTAH 1</a>
-        
-        <a href="https://santiago99-sudo.github.io/viral-update/video1.html">VIDEO VIRAL PEMBUNGKUS 1</a>
-
+    <div id="videoList">
         </div>
+</div>
 
-    <div class="ad-slot">
-        <script type="text/javascript" src="https://www.highperformanceformat.com/592e755abc7058d43ae9daccfee62406/invoke.js"></script>
+<div id="adOverlay">
+    <div class="card">
+        <h3>HANYA 1x IKLAN SAJA</h3>
+        <p>LANJUT NONTON BEBAS</p>
+        <div class="play-btn" onclick="eksekusiVideo()"></div>
+        <p>CLICK RED BUTTON TO PLAY</p>
+        
+        <div style="margin-top:15px;">
+            <script type="text/javascript" src="https://www.highperformanceformat.com/592e755abc7058d43ae9daccfee62406/invoke.js"></script>
+        </div>
     </div>
 </div>
 
 <script>
-// SCRIPT UNIVERSAL: Mengunci semua link agar kena iklan Monetag dulu
-document.addEventListener('click', function(e) {
-    const link = e.target.closest('a');
-    if (link && link.href && !link.href.includes('otieu.com')) {
-        const now = new Date().getTime();
-        const lastAd = localStorage.getItem('lastAdTime');
-        const adInterval = 5 * 60 * 1000; // 5 MENIT
+let linkTujuan = "";
 
-        if (!lastAd || (now - lastAd) > adInterval) {
-            e.preventDefault(); 
-            localStorage.setItem('lastAdTime', now);
-            window.open("https://otieu.com/4/10545078", '_blank'); // Direct Link Monetag
-            
-            setTimeout(() => {
-                window.location.href = link.href;
-            }, 800);
-        }
+// Ambil semua klik pada link video
+document.addEventListener('click', function(e) {
+    const el = e.target.closest('.video-link');
+    if (el) {
+        e.preventDefault();
+        linkTujuan = el.href;
+        document.getElementById('adOverlay').style.display = 'flex';
     }
-}, true);
+});
+
+function eksekusiVideo() {
+    const directLink = "https://otieu.com/4/10545078";
+    window.open(directLink, '_blank'); // Buka Iklan Monetag
+    setTimeout(() => {
+        window.location.href = linkTujuan; // Masuk ke Video
+    }, 1000);
+}
 </script>
 
 </body>
