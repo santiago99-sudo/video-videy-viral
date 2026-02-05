@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Update Harian</title>
+    <title>Video Update Harian</title>
+    
+    <meta name="monetag" content="85429a6afd62863533f1a135efdfdb1d">
     
     <script src="https://quge5.com/88/tag.min.js" data-zone="208248" async data-cfasync="false"></script>
 
@@ -14,7 +16,7 @@
         .container { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 12px; }
         .card { background: #1a1a1a; border-left: 4px solid #ff0000; padding: 15px; border-radius: 8px; text-decoration: none; color: #fff; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         .card:active { background: #333; transform: scale(0.97); }
-        .btn-nonton { color:#ff0000; font-weight:bold; font-size: 14px; border: 1px solid #ff0000; padding: 5px 10px; border-radius: 4px; }
+        .btn-nonton { color:#ff0000; font-weight:bold; font-size: 13px; border: 1px solid #ff0000; padding: 5px 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -35,6 +37,7 @@
             container.innerHTML = '';
             const links = data.split('\n').filter(line => line.trim() !== '');
             
+            // reverse() agar video terbaru ada di posisi teratas
             links.reverse().forEach((link, index) => {
                 const card = document.createElement('a');
                 card.href = `index.html?url=${encodeURIComponent(link.trim())}`;
