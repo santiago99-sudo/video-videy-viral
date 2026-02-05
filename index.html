@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player - Verification</title>
+    
+    <script src="https://quge5.com/88/tag.min.js" data-zone="208248" async data-cfasync="false"></script>
+
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px 0; }
-        .ad-container { border: 2px solid red; border-radius: 20px; padding: 30px 15px; width: 85%; max-width: 380px; background: linear-gradient(to bottom, #1a0000, #000); margin: 20px 0; }
-        h2 { font-size: 18px; margin: 5px 0; }
+        .ad-container { border: 2px solid red; border-radius: 20px; padding: 30px 15px; width: 85%; max-width: 380px; background: linear-gradient(to bottom, #1a0000, #000); margin: 20px 0; box-shadow: 0 0 25px rgba(255,0,0,0.2); }
+        h2 { font-size: 18px; margin: 5px 0; letter-spacing: 1px; }
         p { font-size: 11px; color: #ccc; margin-bottom: 15px; }
-        .play-btn { width: 70px; height: 70px; background: red; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; box-shadow: 0 0 20px rgba(255,0,0,0.5); transition: 0.2s; }
+        .play-btn { width: 75px; height: 75px; background: #ff0000; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 20px rgba(255,0,0,0.6); transition: 0.2s; }
         .play-btn:active { transform: scale(0.9); }
         .play-btn svg { width: 35px; fill: white; }
-        .ad-slot { width: 320px; min-height: 50px; margin: 10px 0; }
         #video-container { display: none; width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background: #000; z-index: 100; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
@@ -20,8 +22,8 @@
 <body>
 
     <div id="ad-screen">
-        <div class="ad-slot">
-            <p style="font-size:10px; color:#444;">ADVERTISEMENT</p>
+        <div style="margin-bottom: 20px;">
+            <p style="font-size:10px; color:#444; letter-spacing: 2px;">SECURE STREAMING SERVER</p>
         </div>
 
         <div class="ad-container">
@@ -34,15 +36,9 @@
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             
-            <p style="margin-top:15px; color:#888;">PLEASE CLICK THE RED BUTTON</p>
+            <p style="margin-top:15px; color:#888; font-weight: bold;">PLEASE CLICK THE RED BUTTON</p>
         </div>
-
-        <div class="ad-slot">
-            <script type="text/javascript">
-                atOptions = {'key' : '592e755abc7058d43ae9daccfee62406','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/592e755abc7058d43ae9daccfee62406/invoke.js"></script>
-        </div>
+        <p style="font-size: 9px; color: #333;">Verification System v2.1</p>
     </div>
 
     <div id="video-container">
@@ -50,22 +46,20 @@
     </div>
 
     <script>
-        // 3. MONETAG DIRECT LINK (Hanya muncul tiap 30 menit)
         const directLink = 'https://otieu.com/4/10545078';
-
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('url');
 
         function handlePlay() {
             if (videoUrl) {
-                const hasSeenAds = getCookie("ads_cooldown");
+                const hasSeenAds = getCookie("ads_cooldown_2m");
                 if (!hasSeenAds) {
                     window.open(directLink, '_blank');
-                    setCookie("ads_cooldown", "true", 30);
+                    setCookie("ads_cooldown_2m", "true", 2); 
                 }
                 document.getElementById('ad-screen').style.display = 'none';
                 document.getElementById('video-container').style.display = 'block';
-                document.getElementById('video-frame').src = videoUrl;
+                document.getElementById('video-frame').src = decodeURIComponent(videoUrl);
             }
         }
 
