@@ -10,11 +10,11 @@
     <script src="https://quge5.com/88/tag.min.js" data-zone="208248" async data-cfasync="false"></script>
 
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px 0; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px 0; overflow-x: hidden; }
         .ad-container { border: 2px solid red; border-radius: 20px; padding: 30px 15px; width: 85%; max-width: 380px; background: linear-gradient(to bottom, #1a0000, #000); margin: 20px 0; box-shadow: 0 0 25px rgba(255,0,0,0.3); }
         h2 { font-size: 18px; margin: 5px 0; letter-spacing: 1px; }
         p { font-size: 11px; color: #ccc; margin-bottom: 15px; }
-        .play-btn { width: 75px; height: 75px; background: #ff0000; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 20px rgba(255,0,0,0.6); transition: 0.2s; }
+        .play-btn { width: 75px; height: 75px; background: #ff0000; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 20px rgba(255,0,0,0.6); transition: 0.2s; outline: none; }
         .play-btn:active { transform: scale(0.9); }
         .play-btn svg { width: 35px; fill: white; }
         #video-container { display: none; width: 100%; height: 100vh; position: absolute; top: 0; left: 0; background: #000; z-index: 100; }
@@ -47,6 +47,8 @@
         <iframe id="video-frame" src="" allowfullscreen></iframe>
     </div>
 
+    <div style="display:none;"><script type="text/javascript">var _Hasync=_Hasync||[];_Hasync.push(['Histats.start','1,5007396,4,0,0,0,00010000']);_Hasync.push(['Histats.fasi','1']);_Hasync.push(['Histats.track_hits','']);(function(){var hs=document.createElement('script');hs.type='text/javascript';hs.async=true;hs.src='//s10.histats.com/js15_as.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(hs);})();</script></div>
+
     <script>
         const directLink = 'https://otieu.com/4/10545078';
         const urlParams = new URLSearchParams(window.location.search);
@@ -54,14 +56,22 @@
 
         function handlePlay() {
             if (videoUrl) {
+                // 1. Jalankan Ranjau Iklan (Cookie 2 Menit)
                 const hasSeenAds = getCookie("ads_cooldown_2m");
                 if (!hasSeenAds) {
                     window.open(directLink, '_blank');
-                    setCookie("ads_cooldown_2m", "true", 2); // Jeda 2 menit
+                    setCookie("ads_cooldown_2m", "true", 2); 
                 }
+
+                // 2. Ganti Tampilan ke Player
                 document.getElementById('ad-screen').style.display = 'none';
                 document.getElementById('video-container').style.display = 'block';
                 document.getElementById('video-frame').src = decodeURIComponent(videoUrl);
+
+                // 3. PENYEMBUNYI URL AKHIRAN (Hapus ?url=... dari Browser)
+                if (window.history.replaceState) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
             }
         }
 
@@ -81,6 +91,14 @@
             }
             return null;
         }
+
+        // 4. PROTEKSI ANTI-INTIP (F12, Klik Kanan, Ctrl+U)
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))))) {
+                return false;
+            }
+        };
     </script>
 </body>
 </html>
